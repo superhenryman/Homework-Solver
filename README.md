@@ -4,7 +4,7 @@
 
 <ul>
 <li>Relies on pytesseract for processing text.</li>
-<li>Uses Google Gemini for all questions.<li>
+<li>Uses Google Gemini for all questions.</li>
 </ul>
 
 <hr>

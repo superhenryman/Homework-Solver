@@ -3,8 +3,8 @@
 <h2>How does it work?</h2>
 
 <ul>
-<li>Relies on pytesseract, and sympy for processing text and math.</li>
-<li>Uses Google Gemini for complex questions.
+<li>Relies on pytesseract for processing text.</li>
+<li>Uses Google Gemini for all questions.<li>
 </ul>
 
 <hr>

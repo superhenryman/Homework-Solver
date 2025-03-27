@@ -135,7 +135,6 @@ def main():
                     print(f"File cleanup error: {str(e)}")
             
             return render_template(
-                "index.html",
                 answer=answer,
                 graph=graph_generated
             )

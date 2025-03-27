@@ -117,6 +117,7 @@ def main():
             file.save(path)
             
             text = get_image_text(path)
+            print(text)
             if not text:
                 return "OCR failed - no text found", 400
                 

@@ -40,7 +40,9 @@ def gen_graph_or_math_answer(text):
     try:
         response = model.generate_content(f"Please answer these questions {text} in a direct fashion, do not say anything else other than the answer in a format of 1- answer, 2- etc... If the input is a graphing question, return 'GRAPH'.")
         ai_response = response.text.strip()
-        
+        expr_response = model.generate_content(f"Extract ONLY the mathematical expression from this text: {text}")
+        expression = expr_response.text.strip()
+        plot_expression(expression)
         if ai_response == "GRAPH":
             plot_expression(text)
             return "Graph generated and saved as graph.png"
@@ -62,16 +64,15 @@ def gen_general_answer(text):
 def if_graphing_or_math(text):
     try:
         response = model.generate_content(f"Are these questions graphing related? {text}, If they are, reply with 'True', or reply with 'False', DO NOT USE ANY PUNCTUATION!")
-        ai_response = response.text
-        if ai_response == "True":
-            return True
-        elif ai_response == "False":
-            return False
-        else:
-            return None
+        ai_response = response.text.lower().strip()
+        return "true" in ai_reponse
     except Exception as e:
         print(f"Unexpected error occured while checking if the answer is a graphing or math question, {e}")
         return f"Unexpected error occured while checking if the answer is a graphing or math question, {e}"
+
+@app.route('/graph.png')
+def serve_graph():
+    return send_file('graph.png', mimetype='image/png')
     
 app = Flask(__name__)
 

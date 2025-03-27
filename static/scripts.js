@@ -9,8 +9,6 @@ document.getElementById("uploadForm").addEventListener("submit", async (e) => {
     const response = (await fetch('/', {method: 'POST', body: formData}));
     const jsonData = response.json();
     console.log(jsonData);
-    const html = await response.text();
-    document.getElementById("results").innerHTML = html;
   } catch (error) {
     console.error('Error:', error);
   }

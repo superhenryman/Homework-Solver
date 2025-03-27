@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container custom-container">
-        <form enctype="multipart/form-data" id="uploadForm">
+        <form enctype="multipart/form-data" id="uploadForm" method="POST">
             <div class="mb-3">
                 <label for="fileinput" class="form-label">Please input your HW below:</label>
                 <input class="form-control" type="file" id="fileinput" name="file">
@@ -26,9 +26,11 @@
                 <img src="/graph.png" alt="graph">
             {% endif %} 
         {% endif %}
-
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
         
     </div>
-    <script src="/static/scripts.js">
+    <script src="/static/scripts.js"></script>
 </body>
 </html>

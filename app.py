@@ -87,6 +87,14 @@ def if_graphing_or_math(text):
 def serve_graph():
     return send_file('graph.png', mimetype='image/png')
 
+# Add this missing function
+def gen_general_answer(text):
+    try:
+        response = model.generate_content(f"Answer this question concisely: {text}")
+        return response.text
+    except Exception as e:
+        return f"Error: {str(e)}"
+
 @app.route("/", methods=["GET", "POST"])
 def main():
     if os.path.exists("graph.png"):
@@ -127,7 +135,7 @@ def main():
             
             return render_template(
                 "index.html",
-                answers=answer,
+                answer=answer,
                 graph=graph_generated
             )
     

@@ -12,6 +12,9 @@
             <input type="file" name="file" id="fileinput">
             <button id="submit">Submit!</button>
         </form>
+        {% if answer %}
+           <p>{{answer }}</p>
+        {% endif %}
     </div>
 </body>
 </html>

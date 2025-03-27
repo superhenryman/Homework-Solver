@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_file  # Added send_file import
+from flask import Flask, request, render_template, send_file, jsonify  # Added send_file import
 import pytesseract
 from PIL import Image
 from werkzeug.utils import secure_filename
@@ -117,7 +117,6 @@ def main():
             file.save(path)
             
             text = get_image_text(path)
-            print(text)
             if not text:
                 return "OCR failed - no text found", 400
                 
@@ -134,9 +133,10 @@ def main():
                 except Exception as e:
                     print(f"File cleanup error: {str(e)}")
             
-            return render_template(
-                answer=answer,
-                graph=graph_generated
+            return jsonify({
+                "answer":answer,
+                "graph":graph_generated
+            }
             )
     
     return render_template("index.html")

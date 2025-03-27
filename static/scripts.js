@@ -5,6 +5,7 @@ document.getElementById("uploadForm").addEventListener("submit", async (e) => {
   
   try {
     const response = await fetch('/', {method: 'POST', body: formData});
+    console.log(response)
     const html = await response.text();
     document.getElementById("results").innerHTML = html;
   } catch (error) {

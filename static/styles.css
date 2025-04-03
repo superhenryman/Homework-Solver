@@ -79,9 +79,9 @@ img {
 }
 
 .footer {
-    color:#ff0000;
-    font-weight:bold;
+    margin:10px;
+    font-size: 12pt;
     position: fixed;
-    left: 0;
-    bottom: 0;
+    top:0;
+    left:0;
 }

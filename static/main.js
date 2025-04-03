@@ -1,7 +1,7 @@
 document.getElementById("uploadForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
-  
+  document.getElementById('img').style.display = 'none';
   try {
     const response = await fetch('/', { 
       method: 'POST', 
@@ -50,5 +50,24 @@ document.getElementById('fileInput').addEventListener('change', function(event) 
       reader.readAsDataURL(file);
   } else {
       alert('Please upload a valid image file.');
+  }
+});
+
+document.addEventListener('paste', async (event) => {
+  const items = event.clipboardData.items;
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].type.startsWith('image')) {
+      const file = items[i].getAsFile();
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      const fileInput = document.getElementById('fileInput');
+      fileInput.files = dataTransfer.files;
+
+      // Trigger the change event
+      const changeEvent = new Event('change');
+      fileInput.dispatchEvent(changeEvent);
+
+      break; // Exit loop after handling the image
+    }
   }
 });

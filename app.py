@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sympy as sp
 import google.generativeai as genai
-
+import re
 API_KEY = os.getenv("API_KEY")
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel("gemini-1.5-flash")
@@ -21,7 +21,8 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 def plot_expression(expression, x_range=(-10, 10), output_file="graph.png"):
     x = sp.symbols('x')
     try:
-        expr = sp.sympify(expression)
+        clean = re.sub(r"[^0-9xX\+\-\*\/\^\(\)\.\,]", "", expression)
+        expr = sp.sympify(clean)
     except Exception as e:
         print(f"Error: {str(e)}")
         return f"Error: {str(e)}"

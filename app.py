@@ -150,7 +150,6 @@ def get_image_text(image_path):
     try:
         img = Image.open(image_path)
         text = pytesseract.image_to_string(img)
-        print(text)
         return text.strip() or None
     except Exception as e:
         print(f"OCR error: {str(e)}")
